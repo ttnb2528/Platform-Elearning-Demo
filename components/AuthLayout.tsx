@@ -4,9 +4,11 @@ import Link from "next/link";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
+  title: string;
+  subtitle: string;
 }
 
-const AuthLayout = ({ children }: AuthLayoutProps) => {
+const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
   return (
     <div className="min-h-screen flex relative overflow-hidden">
       {/* Back Home */}
@@ -35,10 +37,10 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
       {/* Left side - Form */}
       <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
-          {/* <div className="text-center">
+          <div className="text-center">
             <h2 className="text-3xl font-bold text-foreground">{title}</h2>
             <p className="mt-2 text-muted-foreground">{subtitle}</p>
-          </div> */}
+          </div>
           {children}
         </div>
       </div>
