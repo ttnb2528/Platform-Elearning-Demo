@@ -32,19 +32,19 @@ const statusColors = {
 
 const StudentList = ({ students, title }: StudentListProps) => {
   return (
-    <Card>
+    <Card className="h-auto flex flex-col">
       <CardHeader>
         <CardTitle className="text-lg">{title}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1 overflow-auto">
         <div className="space-y-3">
           {students.map((student) => (
             <div
               key={student.id}
-              className="flex items-center justify-between p-3 rounded-lg border"
+              className="flex items-center justify-between p-3 rounded-lg border gap-4"
             >
-              <div className="flex items-center space-x-3">
-                <div className="relative">
+              <div className="flex items-center space-x-3 min-w-0">
+                <div className="relative flex-shrink-0">
                   <Avatar className="h-10 w-10">
                     <AvatarFallback className="bg-accent/20 text-accent">
                       {student.name
@@ -60,7 +60,7 @@ const StudentList = ({ students, title }: StudentListProps) => {
                     }`}
                   />
                 </div>
-                <div className="flex-1 min-w-0">
+                <div className="min-w-0 flex-shrink">
                   <p className="font-medium truncate">{student.name}</p>
                   <p className="text-sm text-muted-foreground truncate">
                     {student.email}
@@ -68,23 +68,30 @@ const StudentList = ({ students, title }: StudentListProps) => {
                 </div>
               </div>
 
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center gap-3 flex-shrink-0">
                 <div className="text-right">
-                  <Badge variant="secondary" className="text-xs">
+                  <Badge
+                    variant="secondary"
+                    className="text-xs whitespace-nowrap"
+                  >
                     {student.progress}% hoàn thành
                   </Badge>
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="text-xs text-muted-foreground mt-1 whitespace-nowrap">
                     {student.lastActive}
                   </p>
                 </div>
 
                 <div className="flex space-x-1">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="flex-shrink-0">
                     <MessageCircle className="h-4 w-4" />
                   </Button>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="sm">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="flex-shrink-0"
+                      >
                         <MoreHorizontal className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
