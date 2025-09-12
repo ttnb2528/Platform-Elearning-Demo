@@ -45,9 +45,7 @@ const AttendanceTracker = ({
   date,
   onUpdateAttendance,
 }: AttendanceTrackerProps) => {
-  const [selectedStudents, setSelectedStudents] = useState<Set<string>>(
-    new Set()
-  );
+
 
   const handleStatusChange = (studentId: string, status: Student["status"]) => {
     onUpdateAttendance(studentId, status);

@@ -5,14 +5,12 @@ interface ProgressCardProps {
   title: string;
   progress: number;
   total: number;
-  color?: string;
 }
 
 const ProgressCard = ({
   title,
   progress,
   total,
-  color = "bg-accent",
 }: ProgressCardProps) => {
   const percentage = Math.round((progress / total) * 100);
 

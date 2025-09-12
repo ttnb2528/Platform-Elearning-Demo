@@ -4,11 +4,9 @@ import Link from "next/link";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
-  title: string;
-  subtitle: string;
 }
 
-const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
+const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
     <div className="min-h-screen flex relative overflow-hidden">
       {/* Back Home */}

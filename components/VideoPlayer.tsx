@@ -15,11 +15,10 @@ import {
 
 interface VideoPlayerProps {
   title: string;
-  videoUrl?: string;
   duration: string;
 }
 
-const VideoPlayer = ({ title, videoUrl, duration }: VideoPlayerProps) => {
+const VideoPlayer = ({ title, duration }: VideoPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState([0]);
   const [volume, setVolume] = useState([80]);

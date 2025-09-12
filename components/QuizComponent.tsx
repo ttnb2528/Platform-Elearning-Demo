@@ -45,7 +45,7 @@ const QuizComponent = ({
     } else {
       // Calculate score
       let correctCount = 0;
-      questions.forEach((question, index) => {
+      questions.forEach((question) => {
         const selectedAnswer = selectedAnswers[question.id];
         if (
           selectedAnswer &&
