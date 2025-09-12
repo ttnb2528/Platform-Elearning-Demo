@@ -12,13 +12,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import Link from "next/link";
 import { Eye, EyeOff, Check, X } from "lucide-react";
 
@@ -35,7 +29,6 @@ const RegisterForm = () => {
     confirmPassword: "",
     city: "",
     country: "",
-    userType: "",
     agreeTerms: false,
   });
 
@@ -75,7 +68,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <Card className="w-full">
+    <Card className="w-full my-8">
       <CardHeader className="space-y-1">
         <div className="text-center">
           <h3 className="text-lg font-semibold">Tạo tài khoản mới</h3>
@@ -85,8 +78,8 @@ const RegisterForm = () => {
         </div>
       </CardHeader>
 
-      <form onSubmit={handleSubmit}>
-        <CardContent className="space-y-4">
+      <form onSubmit={handleSubmit} className="max-h-[500px] overflow-y-auto">
+        <CardContent className="space-y-4 px-6 py-4">
           <div className="space-y-2">
             <Label htmlFor="username">Username</Label>
             <Input
@@ -199,24 +192,6 @@ const RegisterForm = () => {
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="userType">Bạn là</Label>
-            <Select
-              value={formData.userType}
-              onValueChange={(value) =>
-                setFormData({ ...formData, userType: value })
-              }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Chọn loại tài khoản" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="student">Học sinh</SelectItem>
-                <SelectItem value="teacher">Giáo viên</SelectItem>
-                <SelectItem value="parent">Phụ huynh</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
 
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>

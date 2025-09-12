@@ -10,14 +10,27 @@ interface AuthLayoutProps {
 
 const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
   return (
-    <div className="min-h-screen flex relative">
+    <div className="min-h-screen flex relative overflow-hidden">
       {/* Back Home */}
-      <div className="absolute top-4 left-4 z-10">
+      <div className="absolute top-6 left-6 z-10">
         <Link
           href="/"
-          className="text-lg text-accent hover:underline transition-all duration-200"
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-accent hover:text-accent-foreground bg-accent/10 hover:bg-accent/20 rounded-full transition-all duration-200"
         >
-          ← Về trang chủ
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m12 19-7-7 7-7" />
+          </svg>
+          Về trang chủ
         </Link>
       </div>
 
@@ -35,9 +48,9 @@ const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
       {/* Right side - Illustration */}
       <div className="hidden lg:flex flex-1 bg-gradient-to-br from-accent/20 via-muted/30 to-accent/10 items-center justify-center p-8">
         <div className="text-center max-w-md">
-          <div className="w-64 h-64 mx-auto mb-8 bg-accent/20 rounded-full flex items-center justify-center">
+          <div className="w-80 h-80 mx-auto mb-8 rounded-2xl overflow-hidden shadow-2xl">
             <Image
-              src="/images/onyx-logo.webp"
+              src="/children-learning-online.jpg"
               alt="Children learning online"
               width={320}
               height={320}
