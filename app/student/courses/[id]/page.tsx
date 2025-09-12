@@ -10,6 +10,18 @@ import QuizComponent from "@/components/QuizComponent";
 import CourseHeader from "@/components/CourseHeader";
 import LessonSidebar from "@/components/LessonSidebar";
 
+type LessonType = "video" | "quiz" | "assignment";
+
+interface Lesson {
+  id: string;
+  title: string;
+  duration: string;
+  type: LessonType;
+  completed: boolean;
+  locked: boolean;
+  current?: boolean;
+}
+
 const courseData = {
   title: "Toán học cơ bản",
   description:
@@ -24,12 +36,12 @@ const courseData = {
   image: "/colorful-math-learning-for-kids.jpg",
 };
 
-const lessons = [
+const lessons: Lesson[] = [
   {
     id: "1",
     title: "Giới thiệu về số học",
     duration: "10 phút",
-    type: "video" as const,
+    type: "video",
     completed: true,
     locked: false,
   },
@@ -37,7 +49,7 @@ const lessons = [
     id: "2",
     title: "Đếm từ 1 đến 10",
     duration: "15 phút",
-    type: "video" as const,
+    type: "video",
     completed: true,
     locked: false,
   },
@@ -45,7 +57,7 @@ const lessons = [
     id: "3",
     title: "Kiểm tra: Đếm số",
     duration: "5 phút",
-    type: "quiz" as const,
+    type: "quiz",
     completed: true,
     locked: false,
   },
@@ -53,7 +65,7 @@ const lessons = [
     id: "4",
     title: "Phép cộng đơn giản",
     duration: "20 phút",
-    type: "video" as const,
+    type: "video",
     completed: false,
     locked: false,
     current: true,
@@ -62,7 +74,7 @@ const lessons = [
     id: "5",
     title: "Bài tập phép cộng",
     duration: "10 phút",
-    type: "assignment" as const,
+    type: "assignment",
     completed: false,
     locked: false,
   },
@@ -70,7 +82,7 @@ const lessons = [
     id: "6",
     title: "Phép trừ cơ bản",
     duration: "18 phút",
-    type: "video" as const,
+    type: "video",
     completed: false,
     locked: true,
   },
