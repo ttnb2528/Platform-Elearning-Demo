@@ -17,8 +17,7 @@ import {
   MessageCircle,
   Settings,
 } from "lucide-react";
-
-// Mock data
+import type { Assignment, Student, Status, GradeData, AssignmentType, AssignmentStatus } from "@/types";
 const classData = {
   id: "1",
   name: "Toán học lớp 3A",
@@ -119,16 +118,41 @@ const gradeData = {
   ],
 };
 
-export default function ClassDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const [attendanceStudents, setAttendanceStudents] = useState(attendanceData);
-  const [assignments, setAssignments] = useState(assignmentsData);
-  const [grades, setGrades] = useState(gradeData);
 
-  const handleUpdateAttendance = (studentId: string, status: any) => {
+
+// Convert mock data to match types
+const typedAttendanceStudents: Student[] = attendanceData.map(student => ({
+  ...student,
+  status: student.status as Status
+}));
+
+const typedAssignments: Assignment[] = assignmentsData.map(assignment => ({
+  ...assignment,
+  maxScore: 100,
+  title: assignment.title,
+  description: assignment.description || '',
+  type: assignment.type as AssignmentType,
+  status: assignment.status as AssignmentStatus,
+}));
+
+export default function ClassDetailPage() {
+  const [attendanceStudents, setAttendanceStudents] = useState<Student[]>(typedAttendanceStudents);
+  const [assignments, setAssignments] = useState<Assignment[]>(typedAssignments);
+  const [grades, setGrades] = useState<GradeData>({
+    students: gradeData.students,
+    assignments: gradeData.assignments.map(a => ({
+      ...a,
+      title: a.name || '',
+      description: '',
+      dueDate: new Date().toISOString().split('T')[0],
+      type: a.type as AssignmentType,
+      status: 'published' as AssignmentStatus,
+      submissions: 0,
+      totalStudents: classData.students
+    }))
+  });
+
+  const handleUpdateAttendance = (studentId: string, status: Status) => {
     setAttendanceStudents((prev) =>
       prev.map((student) =>
         student.id === studentId ? { ...student, status } : student
@@ -136,8 +160,8 @@ export default function ClassDetailPage({
     );
   };
 
-  const handleCreateAssignment = (newAssignment: any) => {
-    const assignment = {
+  const handleCreateAssignment = (newAssignment: Omit<Assignment, 'id' | 'submissions'>) => {
+    const assignment: Assignment = {
       ...newAssignment,
       id: Date.now().toString(),
       submissions: 0,
@@ -159,8 +183,8 @@ export default function ClassDetailPage({
               assignments: { ...student.assignments, [assignmentId]: grade },
               average:
                 Object.values({ ...student.assignments, [assignmentId]: grade })
-                  .filter((g) => g !== null)
-                  .reduce((sum: number, g: any) => sum + g, 0) /
+                  .filter((g: number | null): g is number => g !== null)
+                  .reduce((sum: number, g: number) => sum + g, 0) /
                 Object.values({
                   ...student.assignments,
                   [assignmentId]: grade,

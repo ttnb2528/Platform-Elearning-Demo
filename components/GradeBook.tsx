@@ -15,20 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Download, Search, Filter } from "lucide-react";
 
-interface StudentGrade {
-  id: string;
-  name: string;
-  email: string;
-  assignments: Record<string, number | null>;
-  average: number;
-}
-
-interface Assignment {
-  id: string;
-  name: string;
-  maxScore: number;
-  type: "homework" | "quiz" | "project" | "exam";
-}
+import type { Assignment, StudentGrade } from "@/types";
 
 interface GradeBookProps {
   students: StudentGrade[];

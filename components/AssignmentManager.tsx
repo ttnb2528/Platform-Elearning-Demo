@@ -23,16 +23,7 @@ import {
 } from "@/components/ui/dialog";
 import { Plus, FileText, Calendar, Users } from "lucide-react";
 
-interface Assignment {
-  id: string;
-  title: string;
-  description: string;
-  dueDate: string;
-  type: "homework" | "quiz" | "project" | "reading";
-  status: "draft" | "published" | "closed";
-  submissions: number;
-  totalStudents: number;
-}
+import type { Assignment } from "@/types";
 
 interface AssignmentManagerProps {
   assignments: Assignment[];
@@ -45,26 +36,24 @@ const typeColors = {
   homework: "bg-blue-100 text-blue-800",
   quiz: "bg-green-100 text-green-800",
   project: "bg-purple-100 text-purple-800",
-  reading: "bg-orange-100 text-orange-800",
+  exam: "bg-red-100 text-red-800",
 };
 
 const typeLabels = {
   homework: "Bài tập",
   quiz: "Kiểm tra",
   project: "Dự án",
-  reading: "Đọc hiểu",
+  exam: "Bài thi",
 };
 
 const statusColors = {
   draft: "bg-gray-100 text-gray-800",
   published: "bg-green-100 text-green-800",
-  closed: "bg-red-100 text-red-800",
 };
 
 const statusLabels = {
   draft: "Nháp",
   published: "Đã giao",
-  closed: "Đã đóng",
 };
 
 const AssignmentManager = ({
@@ -78,6 +67,7 @@ const AssignmentManager = ({
     dueDate: "",
     type: "homework" as Assignment["type"],
     status: "draft" as Assignment["status"],
+    maxScore: 100,
     totalStudents: 25,
   });
 
@@ -90,6 +80,7 @@ const AssignmentManager = ({
         dueDate: "",
         type: "homework",
         status: "draft",
+        maxScore: 100,
         totalStudents: 25,
       });
       setIsCreateDialogOpen(false);
@@ -159,7 +150,7 @@ const AssignmentManager = ({
                       <SelectItem value="homework">Bài tập</SelectItem>
                       <SelectItem value="quiz">Kiểm tra</SelectItem>
                       <SelectItem value="project">Dự án</SelectItem>
-                      <SelectItem value="reading">Đọc hiểu</SelectItem>
+                      <SelectItem value="exam">Bài thi</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
