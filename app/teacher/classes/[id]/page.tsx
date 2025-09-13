@@ -17,7 +17,14 @@ import {
   MessageCircle,
   Settings,
 } from "lucide-react";
-import type { Assignment, Student, Status, GradeData, AssignmentType, AssignmentStatus } from "@/types";
+import type {
+  Assignment,
+  Student,
+  Status,
+  GradeData,
+  AssignmentType,
+  AssignmentStatus,
+} from "@/types";
 const classData = {
   id: "1",
   name: "Toán học lớp 3A",
@@ -118,38 +125,39 @@ const gradeData = {
   ],
 };
 
-
-
 // Convert mock data to match types
-const typedAttendanceStudents: Student[] = attendanceData.map(student => ({
+const typedAttendanceStudents: Student[] = attendanceData.map((student) => ({
   ...student,
-  status: student.status as Status
+  status: student.status as Status,
 }));
 
-const typedAssignments: Assignment[] = assignmentsData.map(assignment => ({
+const typedAssignments: Assignment[] = assignmentsData.map((assignment) => ({
   ...assignment,
   maxScore: 100,
   title: assignment.title,
-  description: assignment.description || '',
+  description: assignment.description || "",
   type: assignment.type as AssignmentType,
   status: assignment.status as AssignmentStatus,
 }));
 
 export default function ClassDetailPage() {
-  const [attendanceStudents, setAttendanceStudents] = useState<Student[]>(typedAttendanceStudents);
-  const [assignments, setAssignments] = useState<Assignment[]>(typedAssignments);
+  const [attendanceStudents, setAttendanceStudents] = useState<Student[]>(
+    typedAttendanceStudents
+  );
+  const [assignments, setAssignments] =
+    useState<Assignment[]>(typedAssignments);
   const [grades, setGrades] = useState<GradeData>({
     students: gradeData.students,
-    assignments: gradeData.assignments.map(a => ({
+    assignments: gradeData.assignments.map((a) => ({
       ...a,
-      title: a.name || '',
-      description: '',
-      dueDate: new Date().toISOString().split('T')[0],
+      title: a.name || "",
+      description: "",
+      dueDate: new Date().toISOString().split("T")[0],
       type: a.type as AssignmentType,
-      status: 'published' as AssignmentStatus,
+      status: "published" as AssignmentStatus,
       submissions: 0,
-      totalStudents: classData.students
-    }))
+      totalStudents: classData.students,
+    })),
   });
 
   const handleUpdateAttendance = (studentId: string, status: Status) => {
@@ -160,7 +168,9 @@ export default function ClassDetailPage() {
     );
   };
 
-  const handleCreateAssignment = (newAssignment: Omit<Assignment, 'id' | 'submissions'>) => {
+  const handleCreateAssignment = (
+    newAssignment: Omit<Assignment, "id" | "submissions">
+  ) => {
     const assignment: Assignment = {
       ...newAssignment,
       id: Date.now().toString(),
